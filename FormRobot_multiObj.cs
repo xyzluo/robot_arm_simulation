@@ -353,7 +353,7 @@ void main(void)
             while (glControl1.IsIdle)
             {
                 //Render();//or glControl1.Invalidate
-                glControl1.Invalidate();
+                glControl1.Invalidate();//this will cause glControl1_Paint be called then Render();
             }
         }
 
