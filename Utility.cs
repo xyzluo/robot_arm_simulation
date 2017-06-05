@@ -116,7 +116,7 @@ namespace _3DViewer
             GL.BindTexture(TextureTarget.Texture2D, _textureId);
 
 
-            GL.Begin(BeginMode.Quads);
+            GL.Begin(PrimitiveType.Quads);
             GL.TexCoord2(0, 0); GL.Vertex2(0, 0);
             GL.TexCoord2(1, 0); GL.Vertex2(TextBitmap.Width, 0);
             GL.TexCoord2(1, 1); GL.Vertex2(TextBitmap.Width, TextBitmap.Height);

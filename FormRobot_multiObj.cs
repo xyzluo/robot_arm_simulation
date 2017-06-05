@@ -73,6 +73,31 @@ void main(void)
     out_frag_color = vec4(ambient + diffuse * lightColor * triangleColor, 1.0);
 
 }";
+
+        string textVertexShaderSource = @"
+#version 330 core
+
+precision highp float;
+
+in vec2 texpos;
+out vec2 uv;
+
+void main(void)
+{
+  uv = texpos;
+}";
+        string textFragmentShaderSource = @"
+#version 330 core
+precision highp float;
+
+in vec2 uv;
+out vec4 out_frag_color;
+
+uniform sampler2D myTextureSampler;
+void main(void)
+{
+  out_frag_color = texture2D(myTextureSampler,uv);
+}";
         #endregion
         public const float toDegree = (float)(180 / Math.PI);
         public const float toRad = (float)(Math.PI/180);
