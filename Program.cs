@@ -15,7 +15,9 @@ namespace _3DViewer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormRobot_multiObj());
+            //Application.Run(new FormRobot_multiObj());
+            Application.Run(new Form1());
+
         }
     }
 }

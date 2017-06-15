@@ -293,15 +293,18 @@ namespace _3DViewer
         //manipulate text size & position
         const float pScaleX = 1f;// pScaleY
         const float pScaleY = 1f;//0.1f;
-        const float pScaleZ = 0.9999999f;
+        //text works in (-1 ~ 0.9999847114086), robot -0.82 ~ -inf
+        // so we display text at deepest to not to block robot arm.
+        const float pScaleZ = 1f;
+        const float depthZ = 0.9999847114086f;
         Vector3 txtPosition = new Vector3(0f, 0f, 0f);
         Vector3[] txtPositionVboData = new Vector3[]{
-            new Vector3( -1.0f*pScaleX,  -1.0f*pScaleY,  1f*pScaleZ),
-            new Vector3( 1.0f*pScaleX,   -1.0f*pScaleY,  1f*pScaleZ),
-            new Vector3( 1.0f*pScaleX,    1.0f*pScaleY,  1f*pScaleZ),
-            new Vector3( -1.0f*pScaleX,   1.0f*pScaleY,  1f*pScaleZ),
-            new Vector3( -1.0f*pScaleX,  -1.0f*pScaleY,  1f*pScaleZ),
-            new Vector3(  1.0f*pScaleX,   1.0f*pScaleY,  1f*pScaleZ)};
+            new Vector3( -1.0f*pScaleX,  -1.0f*pScaleY,  depthZ*pScaleZ),
+            new Vector3( 1.0f*pScaleX,   -1.0f*pScaleY,  depthZ*pScaleZ),
+            new Vector3( 1.0f*pScaleX,    1.0f*pScaleY,  depthZ*pScaleZ),
+            new Vector3( -1.0f*pScaleX,   1.0f*pScaleY,  depthZ*pScaleZ),
+            new Vector3( -1.0f*pScaleX,  -1.0f*pScaleY,  depthZ*pScaleZ),
+            new Vector3(  1.0f*pScaleX,   1.0f*pScaleY,  depthZ*pScaleZ)};
 
         //UV
         const float uvScale = 1.0f;

@@ -73,7 +73,7 @@ void main(void)
     out_frag_color = vec4(ambient + diffuse * lightColor * triangleColor, 1.0);
 
 }";
-
+        #region no_use
         string textVertexShaderSource = @"
 #version 330 core
 
@@ -98,6 +98,8 @@ void main(void)
 {
   out_frag_color = texture2D(myTextureSampler,uv);
 }";
+        #endregion
+
         #endregion
         public const float toDegree = (float)(180 / Math.PI);
         public const float toRad = (float)(Math.PI/180);
@@ -195,7 +197,6 @@ void main(void)
             uniform_objSelector = GL.GetUniformLocation(shaderProgramHandle, "selector");//3
             
             
-            Matrix4.CreatePerspectiveFieldOfView((float)Math.PI / 2, aspectRatio(), 1, 4000, out projectionMatrix);
 
             //
             //modelviewMatrix = Matrix4.LookAt(new Vector3(250, -250, -600), new Vector3(193, -228, -565), new Vector3(0, 1, 0));
@@ -321,15 +322,12 @@ void main(void)
         }
 
 
-
-        protected override void OnLoad(EventArgs e)
+        private void init()
         {
-            base.OnLoad(e);
-
             txtRenderer = new TextRenderer(glControl1.Width, glControl1.Height);
-            
+
             System.Console.WriteLine(glControl1.GraphicsMode.ToString());
-            glControl1.VSync = true;
+            //glControl1.VSync = true;
             glControl1.KeyDown += glControl1_KeyDown;
             //glControl1.KeyPress += glControl1_KeyPress;
             glControl1.Resize += new EventHandler(glControl1_Resize);
@@ -358,6 +356,12 @@ void main(void)
 
             Application.Idle += Application_Idle;// or += new EventHandler(Application_Idle);
             glControl1_Resize(glControl1, EventArgs.Empty);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            init();
         }
 
         #region OnClosing
@@ -394,7 +398,7 @@ void main(void)
 
             //update perspective matrix according to new aspect ratio
             
-            Matrix4.CreatePerspectiveFieldOfView((float)Math.PI / 2, aspectRatio(), 1, 4000, out projectionMatrix);
+            Matrix4.CreatePerspectiveFieldOfView((float)Math.PI / 2, aspectRatio(), 1f, 4000f, out projectionMatrix);
             //projectionMatrix = Matrix4.Identity;
 
             txtRenderer = new TextRenderer(c.ClientSize.Width, c.ClientSize.Height);
@@ -459,6 +463,8 @@ void main(void)
                             DateTime.Now.Second.ToString() +
                             ":" +
                             DateTime.Now.Millisecond.ToString(), mono, Brushes.Yellow, position);
+            position.Y += 10;
+            txtRenderer.DrawString(Speed().ToString(), mono, Brushes.Yellow, position);
             position.Y += 20;
             Vector3 res = new Vector3((int)(mRobot.EOFPose.Row3.X),
                                     (int)(mRobot.EOFPose.Row3.Y),
@@ -679,7 +685,55 @@ void main(void)
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            IKTest();
+            //IKTest();
+            //this.glControl1.Hide();
+            //this.MdiParent = null;
+            StopRendering();
+            this.Hide();
         }
+
+        public void StopRendering()
+        {
+            stopwatch.Stop();
+            Application.Idle -= Application_Idle;
+        }
+        public void StartRendering()
+        {
+            init();
+            Application.Idle += Application_Idle;
+            stopwatch.Start();
+        }
+
+        #region performance
+        float lastSpeed = 0;
+        int counter = 0;
+        private Stopwatch stopwatch=new Stopwatch();
+        private float Speed()
+        {
+            var spd = GetSpeed();
+            if (spd > 0)
+            {
+                this.lastSpeed = spd;
+                return spd;
+            }
+            else
+            {
+                return this.lastSpeed;
+            }
+        }
+        private float GetSpeed()
+        {
+            float result = 0f;
+            counter++;
+            if (counter > 100)
+            {
+                counter = 0;
+                result = stopwatch.ElapsedMilliseconds / 100f;
+                stopwatch.Restart();
+            }
+            return result;
+        }
+        #endregion
+
     }
 }
