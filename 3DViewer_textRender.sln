@@ -9,13 +9,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DRobot", "..\myGit\3DViewe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointCloudConsole", "..\..\..\..\Visual Studio 2017\Projects\PointCloudConsole\PointCloudConsole.csproj", "{A4EC5703-4BCD-48AC-B0E4-F0E3EEC82C73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK_Text_QuickFont", "..\OpenTK_Text_Quad\OpenTK_Text_QuickFont.csproj", "{8D0A0C49-5E12-4A04-9C18-B7C6C0E50F57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK_Text_QuickFont_VAO_VBO", "..\OpenTK_Text_Quad\OpenTK_Text_QuickFont_VAO_VBO.csproj", "{8D0A0C49-5E12-4A04-9C18-B7C6C0E50F57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK_generate_text_bmp", "OpenTK_textDemo_01\OpenTK_generate_text_bmp.csproj", "{9C12879C-51C7-431C-97A1-FFFD71535842}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK_appArchitecture", "..\OpenTK_appArchitecture\OpenTK_appArchitecture.csproj", "{A0AE44C3-2ED8-4BE3-815F-BD5DDFE28F82}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QFont_MDI_no_good", "..\QFontMyDemo\QFont_MDI_no_good.csproj", "{F2CAA627-24E3-4E07-BA8D-93036C2221DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTextRender_VAO_VBO", "MyTextRender_VAO_VBO\MyTextRender_VAO_VBO.csproj", "{28F28EAF-7E92-416D-BEF9-A1D630090BC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,14 @@ Global
 		{F2CAA627-24E3-4E07-BA8D-93036C2221DC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F2CAA627-24E3-4E07-BA8D-93036C2221DC}.Release|x86.ActiveCfg = Release|Any CPU
 		{F2CAA627-24E3-4E07-BA8D-93036C2221DC}.Release|x86.Build.0 = Release|Any CPU
+		{28F28EAF-7E92-416D-BEF9-A1D630090BC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F28EAF-7E92-416D-BEF9-A1D630090BC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F28EAF-7E92-416D-BEF9-A1D630090BC9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{28F28EAF-7E92-416D-BEF9-A1D630090BC9}.Debug|x86.Build.0 = Debug|Any CPU
+		{28F28EAF-7E92-416D-BEF9-A1D630090BC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F28EAF-7E92-416D-BEF9-A1D630090BC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F28EAF-7E92-416D-BEF9-A1D630090BC9}.Release|x86.ActiveCfg = Release|Any CPU
+		{28F28EAF-7E92-416D-BEF9-A1D630090BC9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

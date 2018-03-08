@@ -30,7 +30,7 @@ precision highp float;
 uniform mat4 projection_matrix;
 uniform mat4 modelview_matrix;
 
-in vec3 in_position[7];
+in vec3 in_position;
 in vec3 in_normal;
 in vec2 texpos;
 
@@ -42,7 +42,7 @@ void main(void)
   //works only for orthogonal modelview
   normal = (modelview_matrix * vec4(in_normal, 0)).xyz;
   
-  gl_Position = projection_matrix * modelview_matrix * vec4(in_position[0], 1);
+  gl_Position = projection_matrix * modelview_matrix * vec4(in_position, 1);
   uv = texpos;
 }";
 
@@ -179,7 +179,7 @@ void main(void)
             //bind attribute index with a named attribute variable, index will be used by VAO
             //so the index can be any user specified.
             //can avoid calling BindAttribLocation if use layout = <index> in shader
-            GL.BindAttribLocation(shaderProgramHandle, 0, "in_position[0]");
+            GL.BindAttribLocation(shaderProgramHandle, 0, "in_position");
             GL.BindAttribLocation(shaderProgramHandle, 1, "in_normal");
             GL.BindAttribLocation(shaderProgramHandle, 2, "texpos");
             //GL.BindAttribLocation(shaderProgramHandle, 3, "uv");
@@ -187,7 +187,7 @@ void main(void)
             GL.LinkProgram(shaderProgramHandle);
             Debug.WriteLine(GL.GetProgramInfoLog(shaderProgramHandle));
             //once using this program , text rendering not work 
-            GL.UseProgram(shaderProgramHandle);
+            //GL.UseProgram(shaderProgramHandle);
 
             // get uniforms location
             projectionMatrixLocation = GL.GetUniformLocation(shaderProgramHandle, "projection_matrix");
@@ -265,11 +265,11 @@ void main(void)
             vaoHandle_text = GL.GenVertexArray();
             GL.BindVertexArray(vaoHandle_text);
 
-            GL.EnableVertexAttribArray(0);//see BindAttribLocation for index
+            GL.EnableVertexAttribArray(0);//"in_position" see BindAttribLocation for index
             GL.BindBuffer(BufferTarget.ArrayBuffer, txtPositionVboHandle);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, true, Vector3.SizeInBytes, 0);
 
-            GL.EnableVertexAttribArray(2);//see BindAttribLocation for index
+            GL.EnableVertexAttribArray(2);//"texpos" see BindAttribLocation for index
             GL.BindBuffer(BufferTarget.ArrayBuffer, txtUVVboHandle);
             GL.VertexAttribPointer(2, 2, VertexAttribPointerType.Float, true, Vector2.SizeInBytes, 0);
 
@@ -327,7 +327,7 @@ void main(void)
             txtRenderer = new TextRenderer(glControl1.Width, glControl1.Height);
 
             System.Console.WriteLine(glControl1.GraphicsMode.ToString());
-            //glControl1.VSync = true;
+            glControl1.VSync = true;
             glControl1.KeyDown += glControl1_KeyDown;
             //glControl1.KeyPress += glControl1_KeyPress;
             glControl1.Resize += new EventHandler(glControl1_Resize);
@@ -479,6 +479,7 @@ void main(void)
             }
 
             //bind texture
+            //txtRenderer.Draw();
             int texture = txtRenderer.Texture;
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, texture);
@@ -495,6 +496,7 @@ void main(void)
             GL.DrawArrays(PrimitiveType.Triangles, 0, txtRenderer.txtData.Length);
             GL.Disable(EnableCap.Blend);
 
+            // Robot
             //user update modelviewMatrix
             GL.Uniform1(uniform_objSelector, 1);
             GL.UniformMatrix4(projectionMatrixLocation, false, ref projectionMatrix);

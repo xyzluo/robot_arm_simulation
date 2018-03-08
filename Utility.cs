@@ -218,6 +218,26 @@ namespace _3DViewer
             }
         }
 
+        //public void Draw()
+        //{
+        //    //bind texture
+        //    int texture = this.Texture;
+        //    GL.ActiveTexture(TextureUnit.Texture0);
+        //    GL.BindTexture(TextureTarget.Texture2D, texture);
+        //    GL.Uniform1(uniform_texture, 0);
+
+        //    //text
+        //    GL.Enable(EnableCap.Blend);
+        //    GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+        //    GL.BindVertexArray(vaoHandle_text);
+        //    GL.Uniform1(uniform_objSelector, 0);
+        //    Matrix4 identity = Matrix4.Identity;
+        //    GL.UniformMatrix4(projectionMatrixLocation, false, ref identity);
+        //    GL.UniformMatrix4(modelviewMatrixLocation, false, ref identity);
+        //    GL.DrawArrays(PrimitiveType.Triangles, 0, txtRenderer.txtData.Length);
+        //    GL.Disable(EnableCap.Blend);
+        //}
+
         public void resize(int width, int height)
         {
             throw new Exception("Textrenderer resize() is not implemented");
